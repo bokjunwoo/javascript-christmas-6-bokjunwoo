@@ -5,6 +5,10 @@ const OutputView = {
   printIntroduction() {
     Console.print(RESTAURANT_EVENT_PLANNER_MESSAGE);
   },
+
+  printErrorMessage(message) {
+    Console.print(`${message}\n`);
+  },
 };
 
 export default OutputView;
