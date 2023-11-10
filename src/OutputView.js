@@ -1,9 +1,10 @@
+import { Console } from '@woowacourse/mission-utils';
+import { RESTAURANT_EVENT_PLANNER_MESSAGE } from './constants.js';
+
 const OutputView = {
-  printMenu() {
-    Console.print('<주문 메뉴>');
-    // ...
+  printIntroduction() {
+    Console.print(RESTAURANT_EVENT_PLANNER_MESSAGE);
   },
-  // ...
 };
 
 export default OutputView;
