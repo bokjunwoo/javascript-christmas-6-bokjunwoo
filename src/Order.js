@@ -18,6 +18,14 @@ class Order {
     this.#orderQuantity += quantity;
   }
 
+  calculateTotal() {
+    const total = this.#orderItems.reduce(
+      (total, item) => total + item.quantity * item.price,
+      0
+    );
+    return total;
+  }
+
   validateAndAdd(quantity) {
     try {
       validateMenuQuantity(quantity);
