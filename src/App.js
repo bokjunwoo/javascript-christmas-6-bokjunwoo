@@ -1,9 +1,16 @@
 import InputView from './InputView.js';
+import Menu from './Menu.js';
+import Order from './Order.js';
 import OutputView from './OutputView.js';
 import VisitDate from './VisitDate.js';
 
 class App {
   #visitDate;
+  #order;
+
+  constructor() {
+    this.#order = new Order();
+  }
 
   async run() {
     OutputView.printIntroduction();
@@ -28,12 +35,20 @@ class App {
     while (true) {
       try {
         const input = await InputView.inputOrderSheet();
-        console.log(input)
+        this.processOrderSheet(input);
         break;
       } catch (error) {
         OutputView.printErrorMessage(error.message);
       }
     }
+  }
+
+  processOrderSheet(orderSheetInput) {
+    orderSheetInput.forEach((orderSheet) => {
+      const [menuName, quantity] = orderSheet.split('-');
+      const menu = new Menu(menuName, quantity);
+      this.#order.addMenuItem(menu, parseInt(quantity));
+    });
   }
 }
 
