@@ -1,3 +1,4 @@
+import { menuData } from './data.js';
 import { validateMenuName } from './utils.js';
 
 class Menu {
@@ -10,6 +11,11 @@ class Menu {
 
   #validateName(name) {
     validateMenuName(name);
+  }
+
+  menuInfo() {
+    const menuInfo = menuData.find((menu) => menu.name === this.#name);
+    return menuInfo;
   }
 }
 
