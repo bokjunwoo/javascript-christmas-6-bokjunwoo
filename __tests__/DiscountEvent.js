@@ -59,4 +59,32 @@ describe('DiscountEvent', () => {
       expect(result).toBe(4046);
     });
   });
+
+  describe('calculateSpecialDiscount 메소드', () => {
+    const order = {
+      calculateTotalPrice: jest.fn().mockReturnValue(12000),
+    };
+
+    test('특별 할인 날이면 1000의 할인이 반환되어야 함', () => {
+      const date = {
+        isSpecialDiscountDay: jest.fn().mockReturnValue(true),
+      };
+
+      const discountEvent = new DiscountEvent(date, order);
+      const result = discountEvent.calculateSpecialDiscount();
+
+      expect(result).toBe(1000);
+    });
+
+    test('특별 할인 날이 아니면 할인이 적용되지 않아야 함', () => {
+      const date = {
+        isSpecialDiscountDay: jest.fn().mockReturnValue(false),
+      };
+
+      const discountEvent = new DiscountEvent(date, order);
+      const result = discountEvent.calculateSpecialDiscount();
+
+      expect(result).toBe(0);
+    });
+  });
 });
