@@ -1,4 +1,5 @@
 import { ERROR_MESSAGE } from './constants.js';
+import { menuData } from './data.js';
 
 export const isValidVisitDate = (date) => {
   const numericDate = Number(date);
@@ -16,4 +17,10 @@ export const isValidVisitDate = (date) => {
   }
 
   return true;
+};
+
+export const validateMenuName = (name) => {
+  if (!menuData.find((menu) => menu.name === name)) {
+    throw new Error('[ERROR] 해당 메뉴를 찾을 수 없습니다.');
+  }
 };
