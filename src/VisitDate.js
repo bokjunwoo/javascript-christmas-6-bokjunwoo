@@ -12,11 +12,13 @@ class VisitDate {
     isValidVisitDate(date);
   }
 
-  isChristmasDiscountDay() {
+  christmasDiscountAmount() {
     if (this.#date >= 1 && this.#date <= 25) {
-      return true;
+      const baseDiscount = 1000;
+      const dailyIncrease = 100;
+      return Math.max(baseDiscount + dailyIncrease * (this.#date - 1), 0);
     }
-    return false;
+    return 0;
   }
 
   isWeekend() {
