@@ -24,3 +24,23 @@ export const validateMenuName = (name) => {
     throw new Error('[ERROR] 해당 메뉴를 찾을 수 없습니다.');
   }
 };
+
+export const validateMenuQuantity = (quantity) => {
+  const numericQuantity = Number(quantity);
+
+  if (quantity === undefined) {
+    throw new Error('[ERROR] 주문하신 메뉴의 수량이 입력되지 않았습니다.');
+  }
+
+  if (isNaN(numericQuantity)) {
+    throw new Error('[ERROR] 메뉴의 수량은 숫자여야 합니다.');
+  }
+
+  if (!Number.isInteger(numericQuantity)) {
+    throw new Error('[ERROR] 메뉴의 수량은 정수여야 합니다.');
+  }
+
+  if (numericQuantity > 20) {
+    throw new Error('[ERROR] 최대 주문 수량이 넘었습니다.');
+  }
+};
