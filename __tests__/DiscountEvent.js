@@ -112,4 +112,60 @@ describe('DiscountEvent', () => {
       expect(result).toBe(0);
     });
   });
+
+  describe('calculateDiscountAmount 메소드', () => {
+    test('크리스마스 디데이 할인이 적용(1,500원), 평일 할인 적용, 특별 할인 미적용, 디저트 주문이 총 3개 일 때', () => {
+      const date = {
+        isWeekend: jest.fn().mockReturnValue(false),
+        isSpecialDiscountDay: jest.fn().mockReturnValue(false),
+        christmasDiscountAmount: jest.fn().mockReturnValue(1500),
+      };
+      const order = {
+        calculateTotalPrice: jest.fn().mockReturnValue(10000),
+        mainMenuTotalQuantity: jest.fn().mockReturnValue(2),
+        dessertTotalQuantity: jest.fn().mockReturnValue(3),
+      };
+
+      const discountEvent = new DiscountEvent(date, order);
+      const result = discountEvent.calculateDiscountAmount();
+
+      expect(result).toBe(7569);
+    });
+
+    test('크리스마스 디데이 할인이 미적용, 평일 할인 적용, 특별 할인 적용, 디저트 주문이 총 10개 일 때', () => {
+      const date = {
+        isWeekend: jest.fn().mockReturnValue(false),
+        isSpecialDiscountDay: jest.fn().mockReturnValue(true),
+        christmasDiscountAmount: jest.fn().mockReturnValue(0),
+      };
+      const order = {
+        calculateTotalPrice: jest.fn().mockReturnValue(12000),
+        mainMenuTotalQuantity: jest.fn().mockReturnValue(0),
+        dessertTotalQuantity: jest.fn().mockReturnValue(10),
+      };
+
+      const discountEvent = new DiscountEvent(date, order);
+      const result = discountEvent.calculateDiscountAmount();
+
+      expect(result).toBe(21230);
+    });
+
+    test('크리스마스 디데이 할인이 적용(3200), 주말 할인 적용, 특별 할인 적용, 주문 금액이 12만원 이상, 메인 주문이 총 5개 일 때', () => {
+      const date = {
+        isWeekend: jest.fn().mockReturnValue(true),
+        isSpecialDiscountDay: jest.fn().mockReturnValue(true),
+        christmasDiscountAmount: jest.fn().mockReturnValue(3200),
+      };
+      const order = {
+        calculateTotalPrice: jest.fn().mockReturnValue(130000),
+        mainMenuTotalQuantity: jest.fn().mockReturnValue(5),
+        dessertTotalQuantity: jest.fn().mockReturnValue(10),
+      };
+
+      const discountEvent = new DiscountEvent(date, order);
+      const result = discountEvent.calculateDiscountAmount();
+
+      expect(result).toBe(39315);
+    });
+  });
 });
