@@ -18,6 +18,10 @@ class DiscountEvent {
   calculateSpecialDiscount() {
     return this.#date.isSpecialDiscountDay() ? 1000 : 0;
   }
+
+  calculateGiftEventDiscount() {
+    return this.#order.calculateTotalPrice() > 120000 ? 25000 : 0;
+  }
 }
 
 export default DiscountEvent;
