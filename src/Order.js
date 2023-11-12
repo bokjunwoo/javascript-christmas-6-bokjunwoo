@@ -18,7 +18,7 @@ class Order {
     this.#orderQuantity += quantity;
   }
 
-  calculateTotal() {
+  calculateTotalPrice() {
     const total = this.#orderItems.reduce(
       (total, item) => total + item.quantity * item.price,
       0
