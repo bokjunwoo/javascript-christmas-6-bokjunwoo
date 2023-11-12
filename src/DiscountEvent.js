@@ -14,6 +14,10 @@ class DiscountEvent {
 
     return quantity * 2023;
   }
+
+  calculateSpecialDiscount() {
+    return this.#date.isSpecialDiscountDay() ? 1000 : 0;
+  }
 }
 
 export default DiscountEvent;
