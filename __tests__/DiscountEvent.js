@@ -87,4 +87,29 @@ describe('DiscountEvent', () => {
       expect(result).toBe(0);
     });
   });
+
+  describe('calculateGiftEventDiscount 메소드', () => {
+    const date = {};
+    test('주문 총 가격이 120000 이상이면 증정 이벤트 가격이 할인이 반환되어야 함', () => {
+      const order = {
+        calculateTotalPrice: jest.fn().mockReturnValue(130000),
+      };
+
+      const discountEvent = new DiscountEvent(date, order);
+      const result = discountEvent.calculateGiftEventDiscount();
+
+      expect(result).toBe(25000);
+    });
+
+    test('주문 총 가격이 120000 미만이면 증정 이벤트 가격 할인이 적용되지 않아야 함', () => {
+      const order = {
+        calculateTotalPrice: jest.fn().mockReturnValue(100000),
+      };
+
+      const discountEvent = new DiscountEvent(date, order);
+      const result = discountEvent.calculateGiftEventDiscount();
+
+      expect(result).toBe(0);
+    });
+  });
 });
