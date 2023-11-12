@@ -6,6 +6,13 @@ const InputView = {
     const userInput = await Console.readLineAsync(USER_PROMPT_MESSAGE.DATE);
     return userInput;
   },
+
+  async inputOrderSheet() {
+    const userInput = await Console.readLineAsync(
+      USER_PROMPT_MESSAGE.ORDER_SHEET
+    );
+    return userInput.split(',').map((order) => order.trim());
+  },
 };
 
 export default InputView;
