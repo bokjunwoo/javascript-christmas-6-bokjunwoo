@@ -44,3 +44,12 @@ export const validateMenuQuantity = (quantity) => {
     throw new Error('[ERROR] 최대 주문 수량이 넘었습니다.');
   }
 };
+
+export const checkOrderQuantityLimit = (
+  currentQuantity,
+  additionalQuantity
+) => {
+  if (currentQuantity + additionalQuantity > 20) {
+    throw new Error('[ERROR] 총 주문 수량이 20개를 초과했습니다.');
+  }
+};
