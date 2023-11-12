@@ -9,6 +9,7 @@ class App {
     OutputView.printIntroduction();
 
     await this.UserInputDate();
+    await this.UserInputOrderSheet();
   }
 
   async UserInputDate() {
@@ -16,6 +17,18 @@ class App {
       try {
         const input = await InputView.inputDate();
         this.#visitDate = new VisitDate(input);
+        break;
+      } catch (error) {
+        OutputView.printErrorMessage(error.message);
+      }
+    }
+  }
+
+  async UserInputOrderSheet() {
+    while (true) {
+      try {
+        const input = await InputView.inputOrderSheet();
+        console.log(input)
         break;
       } catch (error) {
         OutputView.printErrorMessage(error.message);
