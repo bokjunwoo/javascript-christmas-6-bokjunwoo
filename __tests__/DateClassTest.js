@@ -26,14 +26,14 @@ describe('VisitDate 클래스 테스트', () => {
   });
 
   describe('VisitDate의 날짜 관련 메소드', () => {
-    test('1일부터 25일까지 isChristmasDiscountDay()가 true를 반환', () => {
-      const visitDate = new VisitDate(1);
-      expect(visitDate.isChristmasDiscountDay()).toBe(true);
+    test('input 날짜가 10일이면 christmasDiscountAmount()가 1900원 반환', () => {
+      const visitDate = new VisitDate(10);
+      expect(visitDate.christmasDiscountAmount()).toBe(1900);
     });
 
-    test('26일부터 isChristmasDiscountDay()가 false를 반환', () => {
+    test('input 날짜가 26일이면 christmasDiscountAmount()가 0원 반환', () => {
       const visitDate = new VisitDate(26);
-      expect(visitDate.isChristmasDiscountDay()).toBe(false);
+      expect(visitDate.christmasDiscountAmount()).toBe(0);
     });
 
     test('주중(일 ~ 목)에 isWeekend()는 false를 반환', () => {
