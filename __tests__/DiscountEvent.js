@@ -30,4 +30,33 @@ describe('DiscountEvent', () => {
       expect(result).toBe(false);
     });
   });
+
+  describe('calculateWeekendOrWeekdayDiscount 메소드', () => {
+    const order = {
+      mainMenuTotalQuantity: jest.fn().mockReturnValue(3),
+      dessertTotalQuantity: jest.fn().mockReturnValue(2),
+    };
+
+    test('주말이면 메인 메뉴 수량에 따른 할인이 반환되어야 함', () => {
+      const date = {
+        isWeekend: jest.fn().mockReturnValue(true),
+      };
+
+      const discountEvent = new DiscountEvent(date, order);
+      const result = discountEvent.calculateWeekendOrWeekdayDiscount();
+
+      expect(result).toBe(6069);
+    });
+
+    test('주중이면 디저트 수량에 따른 할인이 반환되어야 함', () => {
+      const date = {
+        isWeekend: jest.fn().mockReturnValue(false),
+      };
+
+      const discountEvent = new DiscountEvent(date, order);
+      const result = discountEvent.calculateWeekendOrWeekdayDiscount();
+
+      expect(result).toBe(4046);
+    });
+  });
 });
