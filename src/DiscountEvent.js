@@ -7,6 +7,27 @@ class DiscountEvent {
     this.#order = order;
   }
 
+  shouldApplyDiscount() {
+    return this.#order.calculateTotalPrice() >= 10000;
+  }
+
+  calculateDiscountAmount() {
+    if (!this.shouldApplyDiscount()) {
+      return 0;
+    }
+
+    return (
+      this.calculateChristmasDiscount() +
+      this.calculateWeekendOrWeekdayDiscount() +
+      this.calculateSpecialDiscount() +
+      this.calculateGiftEventDiscount()
+    );
+  }
+
+  calculateChristmasDiscount() {
+    return this.#date.christmasDiscountAmount();
+  }
+
   calculateWeekendOrWeekdayDiscount() {
     const quantity = this.#date.isWeekend()
       ? this.#order.mainMenuTotalQuantity()
