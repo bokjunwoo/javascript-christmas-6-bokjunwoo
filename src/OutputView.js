@@ -38,6 +38,15 @@ const OutputView = {
       Console.print(`${detail.name}: -${detail.amount.toLocaleString()}원`);
     });
   },
+
+  printResultTotalDiscountAmount(totalDiscountAmount) {
+    Console.print('\n<총혜택 금액>');
+    if (totalDiscountAmount === 0) {
+      Console.print('없음');
+    } else {
+      Console.print(`-${totalDiscountAmount.toLocaleString()}원`);
+    }
+  },
 };
 
 export default OutputView;
