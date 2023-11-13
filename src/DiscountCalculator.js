@@ -60,22 +60,23 @@ class DiscountCalculator {
   }
 
   calculateBenefitDetails() {
+    if (!this.shouldApplyDiscount()) return null;
+
+    const isWeekend = this.#date.isWeekend();
     const benefits = [
       {
         name: '크리스마스 디데이 할인',
         amount: this.calculateChristmasDiscount(),
       },
       {
-        name: this.#date.isWeekend() ? '주말 할인' : '평일 할인',
+        name: isWeekend ? '주말 할인' : '평일 할인',
         amount: this.calculateWeekendOrWeekdayDiscount(),
       },
       { name: '특별 할인', amount: this.calculateSpecialDiscount() },
       { name: '증정 이벤트', amount: this.calculateGiftEventDiscount() },
     ];
 
-    const filteredBenefits = benefits.filter((benefit) => benefit.amount > 0);
-
-    return filteredBenefits.length > 0 ? filteredBenefits : null;
+    return benefits.filter((benefit) => benefit.amount > 0);
   }
 }
 
