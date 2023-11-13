@@ -65,3 +65,11 @@ export const getBadge = (totalDiscountAmount) => {
     return '없음';
   }
 };
+
+export const getGitfEvent = (totalOrderAmountBeforeDiscount) => {
+  if (totalOrderAmountBeforeDiscount >= 120000) {
+    return '샴페인 1개';
+  } else {
+    return '없음';
+  }
+};
