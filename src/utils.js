@@ -66,7 +66,7 @@ export const getBadge = (totalDiscountAmount) => {
   }
 };
 
-export const getGitfEvent = (totalOrderAmountBeforeDiscount) => {
+export const getGiftEvent = (totalOrderAmountBeforeDiscount) => {
   if (totalOrderAmountBeforeDiscount >= 120000) {
     return '샴페인 1개';
   } else {
