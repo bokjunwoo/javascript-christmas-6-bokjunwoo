@@ -48,7 +48,7 @@ class Order {
     return dessertTotalQuantity;
   }
 
-  giftEventMenuIncluded() {
+  isGiftEventMenuIncluded() {
     return this.#orderItems.some((item) => item.name === '샴페인');
   }
 
