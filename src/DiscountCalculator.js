@@ -1,4 +1,4 @@
-class DiscountEvent {
+class DiscountCalculator {
   #date;
   #order;
 
@@ -79,4 +79,4 @@ class DiscountEvent {
   }
 }
 
-export default DiscountEvent;
+export default DiscountCalculator;

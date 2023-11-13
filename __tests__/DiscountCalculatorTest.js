@@ -1,6 +1,6 @@
-import DiscountEvent from '../src/DiscountEvent';
+import DiscountCalculator from '../src/DiscountCalculator';
 
-describe('DiscountEvent', () => {
+describe('DiscountCalculator', () => {
   describe('shouldApplyDiscount 메소드', () => {
     const date = {};
 
@@ -11,8 +11,8 @@ describe('DiscountEvent', () => {
         dessertTotalQuantity: jest.fn().mockReturnValue(1),
       };
 
-      const discountEvent = new DiscountEvent(date, order);
-      const result = discountEvent.shouldApplyDiscount();
+      const discountCalculator = new DiscountCalculator(date, order);
+      const result = discountCalculator.shouldApplyDiscount();
 
       expect(result).toBe(true);
     });
@@ -24,8 +24,8 @@ describe('DiscountEvent', () => {
         dessertTotalQuantity: jest.fn().mockReturnValue(1),
       };
 
-      const discountEvent = new DiscountEvent(date, order);
-      const result = discountEvent.shouldApplyDiscount();
+      const discountCalculator = new DiscountCalculator(date, order);
+      const result = discountCalculator.shouldApplyDiscount();
 
       expect(result).toBe(false);
     });
@@ -42,8 +42,8 @@ describe('DiscountEvent', () => {
         isWeekend: jest.fn().mockReturnValue(true),
       };
 
-      const discountEvent = new DiscountEvent(date, order);
-      const result = discountEvent.calculateWeekendOrWeekdayDiscount();
+      const discountCalculator = new DiscountCalculator(date, order);
+      const result = discountCalculator.calculateWeekendOrWeekdayDiscount();
 
       expect(result).toBe(6069);
     });
@@ -53,8 +53,8 @@ describe('DiscountEvent', () => {
         isWeekend: jest.fn().mockReturnValue(false),
       };
 
-      const discountEvent = new DiscountEvent(date, order);
-      const result = discountEvent.calculateWeekendOrWeekdayDiscount();
+      const discountCalculator = new DiscountCalculator(date, order);
+      const result = discountCalculator.calculateWeekendOrWeekdayDiscount();
 
       expect(result).toBe(4046);
     });
@@ -70,8 +70,8 @@ describe('DiscountEvent', () => {
         isSpecialDiscountDay: jest.fn().mockReturnValue(true),
       };
 
-      const discountEvent = new DiscountEvent(date, order);
-      const result = discountEvent.calculateSpecialDiscount();
+      const discountCalculator = new DiscountCalculator(date, order);
+      const result = discountCalculator.calculateSpecialDiscount();
 
       expect(result).toBe(1000);
     });
@@ -81,8 +81,8 @@ describe('DiscountEvent', () => {
         isSpecialDiscountDay: jest.fn().mockReturnValue(false),
       };
 
-      const discountEvent = new DiscountEvent(date, order);
-      const result = discountEvent.calculateSpecialDiscount();
+      const discountCalculator = new DiscountCalculator(date, order);
+      const result = discountCalculator.calculateSpecialDiscount();
 
       expect(result).toBe(0);
     });
@@ -95,8 +95,8 @@ describe('DiscountEvent', () => {
         calculateTotalPrice: jest.fn().mockReturnValue(130000),
       };
 
-      const discountEvent = new DiscountEvent(date, order);
-      const result = discountEvent.calculateGiftEventDiscount();
+      const discountCalculator = new DiscountCalculator(date, order);
+      const result = discountCalculator.calculateGiftEventDiscount();
 
       expect(result).toBe(25000);
     });
@@ -106,8 +106,8 @@ describe('DiscountEvent', () => {
         calculateTotalPrice: jest.fn().mockReturnValue(100000),
       };
 
-      const discountEvent = new DiscountEvent(date, order);
-      const result = discountEvent.calculateGiftEventDiscount();
+      const discountCalculator = new DiscountCalculator(date, order);
+      const result = discountCalculator.calculateGiftEventDiscount();
 
       expect(result).toBe(0);
     });
@@ -126,8 +126,8 @@ describe('DiscountEvent', () => {
         dessertTotalQuantity: jest.fn().mockReturnValue(3),
       };
 
-      const discountEvent = new DiscountEvent(date, order);
-      const result = discountEvent.calculateTotalDiscountAmount();
+      const discountCalculator = new DiscountCalculator(date, order);
+      const result = discountCalculator.calculateTotalDiscountAmount();
 
       expect(result).toBe(7569);
     });
@@ -144,8 +144,8 @@ describe('DiscountEvent', () => {
         dessertTotalQuantity: jest.fn().mockReturnValue(10),
       };
 
-      const discountEvent = new DiscountEvent(date, order);
-      const result = discountEvent.calculateTotalDiscountAmount();
+      const discountCalculator = new DiscountCalculator(date, order);
+      const result = discountCalculator.calculateTotalDiscountAmount();
 
       expect(result).toBe(21230);
     });
@@ -162,8 +162,8 @@ describe('DiscountEvent', () => {
         dessertTotalQuantity: jest.fn().mockReturnValue(10),
       };
 
-      const discountEvent = new DiscountEvent(date, order);
-      const result = discountEvent.calculateTotalDiscountAmount();
+      const discountCalculator = new DiscountCalculator(date, order);
+      const result = discountCalculator.calculateTotalDiscountAmount();
 
       expect(result).toBe(39315);
     });
@@ -184,8 +184,8 @@ describe('DiscountEvent', () => {
         isGiftEventMenuIncluded: jest.fn().mockReturnValue(true),
       };
 
-      const discountEvent = new DiscountEvent(date, order);
-      const result = discountEvent.calculateAdjustedDiscountAmount();
+      const discountCalculator = new DiscountCalculator(date, order);
+      const result = discountCalculator.calculateAdjustedDiscountAmount();
 
       expect(result).toBe(25000);
     });
@@ -204,8 +204,8 @@ describe('DiscountEvent', () => {
         isGiftEventMenuIncluded: jest.fn().mockReturnValue(false),
       };
 
-      const discountEvent = new DiscountEvent(date, order);
-      const result = discountEvent.calculateAdjustedDiscountAmount();
+      const discountCalculator = new DiscountCalculator(date, order);
+      const result = discountCalculator.calculateAdjustedDiscountAmount();
 
       expect(result).toBe(0);
     });
@@ -225,8 +225,8 @@ describe('DiscountEvent', () => {
         dessertTotalQuantity: jest.fn().mockReturnValue(0),
       };
 
-      const discountEvent = new DiscountEvent(date, order);
-      const result = discountEvent.calculateBenefitDetails();
+      const discountCalculator = new DiscountCalculator(date, order);
+      const result = discountCalculator.calculateBenefitDetails();
 
       expect(result).toBeNull();
     });
@@ -244,8 +244,8 @@ describe('DiscountEvent', () => {
         dessertTotalQuantity: jest.fn().mockReturnValue(5),
       };
 
-      const discountEvent = new DiscountEvent(date, order);
-      const result = discountEvent.calculateBenefitDetails();
+      const discountCalculator = new DiscountCalculator(date, order);
+      const result = discountCalculator.calculateBenefitDetails();
 
       expect(result).toEqual([
         { name: '크리스마스 디데이 할인', amount: 1500 },
@@ -268,8 +268,8 @@ describe('DiscountEvent', () => {
         dessertTotalQuantity: jest.fn().mockReturnValue(3),
       };
 
-      const discountEvent = new DiscountEvent(date, order);
-      const result = discountEvent.calculateBenefitDetails();
+      const discountCalculator = new DiscountCalculator(date, order);
+      const result = discountCalculator.calculateBenefitDetails();
 
       expect(result).toEqual([{ name: '평일 할인', amount: 3 * 2023 }]);
     });
