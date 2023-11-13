@@ -9,6 +9,10 @@ class Order {
     this.#orderQuantity = 0;
   }
 
+  menuOrdered() {
+    return this.#orderItems.map((item) => `${item.name}-${item.quantity}`);
+  }
+
   addMenuItem(menu, quantity) {
     this.validateAndAdd(quantity);
 
