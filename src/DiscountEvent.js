@@ -43,6 +43,21 @@ class DiscountEvent {
   calculateGiftEventDiscount() {
     return this.#order.calculateTotalPrice() > 120000 ? 25000 : 0;
   }
+
+  calculateAdjustedDiscountAmount() {
+    const isGiftEventMenuIncluded = this.#order.isGiftEventMenuIncluded();
+
+    let totalDiscountAmount = this.calculateTotalDiscountAmount();
+
+    if (
+      this.#order.calculateTotalPrice() > 120000 &&
+      !isGiftEventMenuIncluded
+    ) {
+      totalDiscountAmount -= 25000;
+    }
+
+    return totalDiscountAmount;
+  }
 }
 
 export default DiscountEvent;
