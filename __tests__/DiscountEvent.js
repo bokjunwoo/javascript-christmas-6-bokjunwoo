@@ -190,7 +190,7 @@ describe('DiscountEvent', () => {
       expect(result).toBe(25000);
     });
 
-    test('증정 이벤트 메뉴가 미포함되어 있으면 기존 할인에서 기프트 이벤트 할인을 차감한 값을 반환해야 함', () => {
+    test('증정 이벤트 메뉴가 미포함되어 있으면 기존 할인에서 증정 이벤트 할인을 차감한 값을 반환해야 함', () => {
       const date = {
         isWeekend: jest.fn().mockReturnValue(false),
         isSpecialDiscountDay: jest.fn().mockReturnValue(false),
@@ -208,6 +208,70 @@ describe('DiscountEvent', () => {
       const result = discountEvent.calculateAdjustedDiscountAmount();
 
       expect(result).toBe(0);
+    });
+  });
+
+  describe('calculateBenefitDetails 메소드', () => {
+    test('할인이 없으면 null을 반환해야 함', () => {
+      const date = {
+        isWeekend: jest.fn().mockReturnValue(false),
+        isSpecialDiscountDay: jest.fn().mockReturnValue(false),
+        christmasDiscountAmount: jest.fn().mockReturnValue(0),
+      };
+
+      const order = {
+        calculateTotalPrice: jest.fn().mockReturnValue(8000),
+        mainMenuTotalQuantity: jest.fn().mockReturnValue(0),
+        dessertTotalQuantity: jest.fn().mockReturnValue(0),
+      };
+
+      const discountEvent = new DiscountEvent(date, order);
+      const result = discountEvent.calculateBenefitDetails();
+
+      expect(result).toBeNull();
+    });
+
+    test('할인이 적용된 항목들을 배열로 반환해야 함', () => {
+      const date = {
+        isWeekend: jest.fn().mockReturnValue(true),
+        isSpecialDiscountDay: jest.fn().mockReturnValue(true),
+        christmasDiscountAmount: jest.fn().mockReturnValue(1500),
+      };
+
+      const order = {
+        calculateTotalPrice: jest.fn().mockReturnValue(120000),
+        mainMenuTotalQuantity: jest.fn().mockReturnValue(5),
+        dessertTotalQuantity: jest.fn().mockReturnValue(5),
+      };
+
+      const discountEvent = new DiscountEvent(date, order);
+      const result = discountEvent.calculateBenefitDetails();
+
+      expect(result).toEqual([
+        { name: '크리스마스 디데이 할인', amount: 1500 },
+        { name: '주말 할인', amount: 5 * 2023 },
+        { name: '특별 할인', amount: 1000 },
+        { name: '증정 이벤트', amount: 25000 },
+      ]);
+    });
+
+    test('하나의 할인이 적용된 경우 해당 항목만 배열로 반환해야 함', () => {
+      const date = {
+        isWeekend: jest.fn().mockReturnValue(false),
+        isSpecialDiscountDay: jest.fn().mockReturnValue(false),
+        christmasDiscountAmount: jest.fn().mockReturnValue(0),
+      };
+
+      const order = {
+        calculateTotalPrice: jest.fn().mockReturnValue(12000),
+        mainMenuTotalQuantity: jest.fn().mockReturnValue(0),
+        dessertTotalQuantity: jest.fn().mockReturnValue(3),
+      };
+
+      const discountEvent = new DiscountEvent(date, order);
+      const result = discountEvent.calculateBenefitDetails();
+
+      expect(result).toEqual([{ name: '평일 할인', amount: 3 * 2023 }]);
     });
   });
 });
