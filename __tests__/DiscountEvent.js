@@ -127,7 +127,7 @@ describe('DiscountEvent', () => {
       };
 
       const discountEvent = new DiscountEvent(date, order);
-      const result = discountEvent.calculateDiscountAmount();
+      const result = discountEvent.calculateTotalDiscountAmount();
 
       expect(result).toBe(7569);
     });
@@ -145,7 +145,7 @@ describe('DiscountEvent', () => {
       };
 
       const discountEvent = new DiscountEvent(date, order);
-      const result = discountEvent.calculateDiscountAmount();
+      const result = discountEvent.calculateTotalDiscountAmount();
 
       expect(result).toBe(21230);
     });
@@ -163,7 +163,7 @@ describe('DiscountEvent', () => {
       };
 
       const discountEvent = new DiscountEvent(date, order);
-      const result = discountEvent.calculateDiscountAmount();
+      const result = discountEvent.calculateTotalDiscountAmount();
 
       expect(result).toBe(39315);
     });

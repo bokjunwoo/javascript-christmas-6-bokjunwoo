@@ -11,7 +11,7 @@ class DiscountEvent {
     return this.#order.calculateTotalPrice() >= 10000;
   }
 
-  calculateDiscountAmount() {
+  calculateTotalDiscountAmount() {
     if (!this.shouldApplyDiscount()) {
       return 0;
     }
