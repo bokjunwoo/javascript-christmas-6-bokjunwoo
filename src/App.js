@@ -3,6 +3,8 @@ import Menu from './Menu.js';
 import Order from './Order.js';
 import OutputView from './OutputView.js';
 import VisitDate from './VisitDate.js';
+import DiscountCalculator from './DiscountCalculator.js';
+import { getBadge, getGiftEvent } from './utils.js';
 
 class App {
   #visitDate;
@@ -36,6 +38,7 @@ class App {
       try {
         const input = await InputView.inputOrderSheet();
         this.processOrderSheet(input);
+        this.displayOrderDetails();
         break;
       } catch (error) {
         OutputView.printErrorMessage(error.message);
@@ -49,6 +52,67 @@ class App {
       const menu = new Menu(menuName, quantity);
       this.#order.addMenuItem(menu, parseInt(quantity));
     });
+  }
+
+  displayOrderDetails() {
+    const discountCalculator = new DiscountCalculator(
+      this.#visitDate,
+      this.#order
+    );
+
+    const totalOrderAmountBeforeDiscount = this.#order.calculateTotalPrice();
+    const { totalDiscountAmount, finalDiscountAmount } =
+      this.calculateDiscountAmounts(discountCalculator);
+
+    this.printOrderDetails(
+      discountCalculator,
+      totalOrderAmountBeforeDiscount,
+      totalDiscountAmount,
+      finalDiscountAmount
+    );
+  }
+
+  calculateDiscountAmounts(discountCalculator) {
+    const totalDiscountAmount =
+      discountCalculator.calculateTotalDiscountAmount();
+    const finalDiscountAmount =
+      discountCalculator.calculateAdjustedDiscountAmount();
+    return { totalDiscountAmount, finalDiscountAmount };
+  }
+
+  printOrderDetails(
+    discountCalculator,
+    totalOrderAmountBeforeDiscount,
+    totalDiscountAmount,
+    finalDiscountAmount
+  ) {
+    const benefitDetails = discountCalculator.calculateBenefitDetails();
+    const paymentAmountAfterDiscount =
+      totalOrderAmountBeforeDiscount - finalDiscountAmount;
+
+    this.outputOrderDetails(
+      totalOrderAmountBeforeDiscount,
+      benefitDetails,
+      totalDiscountAmount,
+      paymentAmountAfterDiscount
+    );
+  }
+
+  outputOrderDetails(
+    totalOrderAmountBeforeDiscount,
+    benefitDetails,
+    totalDiscountAmount,
+    paymentAmountAfterDiscount
+  ) {
+    OutputView.printOrderMenu(this.#order.menuOrdered());
+    OutputView.printTotalOrderAmountBeforeDiscount(
+      totalOrderAmountBeforeDiscount
+    );
+    OutputView.printGiftEvent(getGiftEvent(totalOrderAmountBeforeDiscount));
+    OutputView.printResultTotalDiscountAmount(totalDiscountAmount);
+    OutputView.printBenefitDetails(benefitDetails);
+    OutputView.printPaymentAmountAfterDiscount(paymentAmountAfterDiscount);
+    OutputView.printDecemberEventBadge(getBadge(totalDiscountAmount));
   }
 }
 
