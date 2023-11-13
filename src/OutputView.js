@@ -9,6 +9,13 @@ const OutputView = {
   printErrorMessage(message) {
     Console.print(`${message}\n`);
   },
+
+  printOrderMenu(menuOrdered) {
+    Console.print('\n<주문 메뉴>');
+    menuOrdered.forEach((menu) => {
+      Console.print(menu);
+    });
+  },
 };
 
 export default OutputView;
