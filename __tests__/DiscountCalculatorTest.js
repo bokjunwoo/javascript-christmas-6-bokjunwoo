@@ -221,8 +221,8 @@ describe('DiscountCalculator', () => {
 
       const order = {
         calculateTotalPrice: jest.fn().mockReturnValue(8000),
-        mainMenuTotalQuantity: jest.fn().mockReturnValue(0),
-        dessertTotalQuantity: jest.fn().mockReturnValue(0),
+        mainMenuTotalQuantity: jest.fn().mockReturnValue(1),
+        dessertTotalQuantity: jest.fn().mockReturnValue(1),
       };
 
       const discountCalculator = new DiscountCalculator(date, order);
