@@ -27,15 +27,29 @@ class Order {
   }
 
   mainMenuTotalQuantity() {
-    const mainMenuItems = this.#orderItems.filter((item) => item.type === 'main');
-    const mainMenuTotalQuantity = mainMenuItems.reduce((total, item) => total + item.quantity, 0);
+    const mainMenuItems = this.#orderItems.filter(
+      (item) => item.type === 'main'
+    );
+    const mainMenuTotalQuantity = mainMenuItems.reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
     return mainMenuTotalQuantity;
   }
 
   dessertTotalQuantity() {
-    const dessertItems = this.#orderItems.filter((item) => item.type === 'dessert');
-    const dessertTotalQuantity = dessertItems.reduce((total, item) => total + item.quantity, 0);
+    const dessertItems = this.#orderItems.filter(
+      (item) => item.type === 'dessert'
+    );
+    const dessertTotalQuantity = dessertItems.reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
     return dessertTotalQuantity;
+  }
+
+  giftEventMenuIncluded() {
+    return this.#orderItems.some((item) => item.name === '샴페인');
   }
 
   validateAndAdd(quantity) {
