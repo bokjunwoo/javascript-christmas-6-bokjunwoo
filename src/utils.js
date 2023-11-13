@@ -53,3 +53,15 @@ export const checkOrderQuantityLimit = (
     throw new Error('[ERROR] 총 주문 수량이 20개를 초과했습니다.');
   }
 };
+
+export const getBadge = (totalDiscountAmount) => {
+  if (totalDiscountAmount >= 20000) {
+    return '산타';
+  } else if (totalDiscountAmount >= 10000) {
+    return '트리';
+  } else if (totalDiscountAmount >= 5000) {
+    return '별';
+  } else {
+    return '없음';
+  }
+};
