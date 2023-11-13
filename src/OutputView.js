@@ -21,6 +21,11 @@ const OutputView = {
     Console.print('\n<할인 전 총주문 금액>');
     Console.print(`${totalOrderAmountBeforeDiscount.toLocaleString()}원`);
   },
+
+  printGiftEvent(giftMenu) {
+    Console.print('\n<증정 메뉴>');
+    Console.print(giftMenu);
+  },
 };
 
 export default OutputView;
