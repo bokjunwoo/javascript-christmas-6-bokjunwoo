@@ -1,6 +1,18 @@
 import Menu from '../src/Menu';
 import Order from '../src/Order';
 
+class MockMenu {
+  constructor(name, price, type) {
+    this.name = name;
+    this.price = price;
+    this.type = type;
+  }
+
+  menuInfo() {
+    return { name: this.name, price: this.price, type: this.type };
+  }
+}
+
 describe('Order 클래스', () => {
   let order;
 
@@ -65,6 +77,32 @@ describe('Order 클래스', () => {
       order.addMenuItem(mockMenu, 5);
 
       expect(() => order.addMenuItem(mockMenu, 16)).toThrowError('[ERROR]');
+    });
+  });
+
+  describe('메인, 디저트 총 주문 수량 메소드', () => {
+    test('주문된 메인 메뉴의 총 수량을 반환해야 함', () => {
+      const mockMenu1 = new MockMenu('아메리카노', 3000, 'main');
+      const mockMenu2 = new MockMenu('햄버거', 5000, 'main');
+      const mockMenu3 = new MockMenu('치킨 스테이크', 8000, 'main');
+
+      order.addMenuItem(mockMenu1, 2);
+      order.addMenuItem(mockMenu2, 1);
+      order.addMenuItem(mockMenu3, 3);
+
+      const result = order.mainMenuTotalQuantity();
+      expect(result).toBe(6);
+    });
+
+    test('주문된 디저트 메뉴의 총 수량을 반환해야 함', () => {
+      const mockMenu1 = new MockMenu('초콜릿 케이크', 6000, 'dessert');
+      const mockMenu2 = new MockMenu('치즈케이크', 7000, 'dessert');
+
+      order.addMenuItem(mockMenu1, 2);
+      order.addMenuItem(mockMenu2, 1);
+
+      const result = order.dessertTotalQuantity();
+      expect(result).toBe(3);
     });
   });
 });
