@@ -1,11 +1,31 @@
 import { Console } from '@woowacourse/mission-utils';
-import {
-  OUTPUT_MESSAGES,
-} from './constants.js';
+import { OUTPUT_MESSAGES, typeMap } from './constants.js';
+import { formatPrice, organizeMenuByType } from './utils.js';
+import { menuData } from './data.js';
 
 const OutputView = {
   printIntroduction() {
     Console.print(OUTPUT_MESSAGES.INTRODUCTION);
+  },
+
+  printMenuList() {
+    Console.print(OUTPUT_MESSAGES.MENU_LIST_HEADER);
+    const organizedMenu = organizeMenuByType(menuData);
+    Object.keys(organizedMenu).forEach((type) => {
+      Console.print(`<${typeMap[type]}>`);
+      Console.print(
+        organizedMenu[type]
+          .map((item) => `${item.name}(${formatPrice(item.price)})`)
+          .join(', ')
+      );
+      Console.print('');
+    });
+  },
+
+  printEventPreview(todayInfo) {
+    Console.print(
+      `\n${todayInfo.month}월 ${todayInfo.day}일(${todayInfo.dayOfTheWeek})${OUTPUT_MESSAGES.EVENT_PREVIEW_HEADER}`
+    );
   },
 
   printErrorMessage(message) {
@@ -59,6 +79,10 @@ const OutputView = {
     Console.print(OUTPUT_MESSAGES.DECEMBER_EVENT_BADGE);
     Console.print(badge);
   },
+
+  printThankYouMessage() {
+    Console.print(OUTPUT_MESSAGES.THANK_YOU_MESSAGE)
+  }
 };
 
 export default OutputView;
