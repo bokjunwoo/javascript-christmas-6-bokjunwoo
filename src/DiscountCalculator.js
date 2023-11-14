@@ -11,7 +11,8 @@ class DiscountCalculator {
 
   shouldApplyDiscount() {
     return (
-      this.#order.calculateTotalAmount() >= DISCOUNT_CONSTANTS.DISCOUNT_THRESHOLD
+      this.#order.calculateTotalAmount() >=
+      DISCOUNT_CONSTANTS.DISCOUNT_THRESHOLD
     );
   }
 
@@ -55,18 +56,22 @@ class DiscountCalculator {
 
   calculateAdjustedDiscountAmount() {
     const isGiftEventMenuIncluded = this.#order.isGiftEventMenuIncluded();
-
     let totalDiscountAmount = this.calculateTotalDiscountAmount();
 
-    if (
-      this.#order.calculateTotalAmount() >=
-        DISCOUNT_CONSTANTS.GIFT_EVENT_DISCOUNT_THRESHOLD &&
-      !isGiftEventMenuIncluded
-    ) {
+    if (this.shouldApplyGiftEventDiscount(isGiftEventMenuIncluded)) {
       totalDiscountAmount -= DISCOUNT_CONSTANTS.GIFT_EVENT_DISCOUNT_AMOUNT;
     }
 
     return totalDiscountAmount;
+  }
+
+  shouldApplyGiftEventDiscount(isGiftEventMenuIncluded) {
+    return (
+      this.shouldApplyDiscount() &&
+      this.#order.calculateTotalAmount() >=
+        DISCOUNT_CONSTANTS.GIFT_EVENT_DISCOUNT_THRESHOLD &&
+      !isGiftEventMenuIncluded
+    );
   }
 
   calculateBenefitDetails() {
