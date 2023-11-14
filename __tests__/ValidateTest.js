@@ -1,4 +1,5 @@
-import { checkOrderQuantityLimit, validateMenuQuantity } from '../src/utils';
+import { validateMenuQuantity } from '../src/validate.js';
+import { checkOrderQuantityLimit } from '../src/utils.js';
 
 describe('Order 클래스 테스트', () => {
   describe('validateMenuQuantity() 유효성 검사', () => {

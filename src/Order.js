@@ -1,5 +1,6 @@
 import { MENU_NAMES, MENU_TYPES } from './constants.js';
-import { checkOrderQuantityLimit, validateMenuQuantity } from './utils.js';
+import { checkOrderQuantityLimit } from './utils.js';
+import { validateMenuQuantity } from './validate.js';
 
 class Order {
   #orderItems;

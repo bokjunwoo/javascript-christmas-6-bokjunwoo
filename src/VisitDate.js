@@ -1,5 +1,5 @@
 import { DATES, DISCOUNT_CONSTANTS } from './constants.js';
-import { isValidVisitDate } from './utils.js';
+import { isValidVisitDate } from './validate.js';
 
 class VisitDate {
   #date;

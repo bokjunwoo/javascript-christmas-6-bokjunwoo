@@ -1,5 +1,5 @@
 import { menuData } from './data.js';
-import { validateMenuName } from './utils.js';
+import { validateMenuName } from './validate.js';
 
 class Menu {
   #name;
