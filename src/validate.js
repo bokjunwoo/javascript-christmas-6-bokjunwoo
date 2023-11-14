@@ -1,4 +1,9 @@
-import { DATES, ERROR_MESSAGE, MAX_ORDER_QUANTITY } from './constants.js';
+import {
+  DATES,
+  ERROR_MESSAGE,
+  MAX_ORDER_QUANTITY,
+  MENU_TYPES,
+} from './constants.js';
 import { menuData } from './data.js';
 
 export const validVisitDate = (date) => {
@@ -41,4 +46,15 @@ export const validateMenuQuantity = (quantity) => {
   if (numericQuantity > MAX_ORDER_QUANTITY) {
     throw new Error(ERROR_MESSAGE.EXCEED_MAX_QUANTITY);
   }
+};
+
+export const checkDuplicateMenu = (orderItems) => {
+  const seen = new Set();
+
+  orderItems.forEach((item) => {
+    if (seen.has(item.name)) {
+      throw new Error(ERROR_MESSAGE.DUPLICATE_MENU);
+    }
+    seen.add(item.name);
+  });
 };
