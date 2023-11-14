@@ -51,4 +51,20 @@ describe('Order 클래스', () => {
       expect(result).toEqual(['초코케이크-2', '레드와인-1']);
     });
   });
+
+  describe('addMenuItem 메소드', () => {
+    test('주문 수량이 한도를 초과하면 에러를 던져야 함', () => {
+      const menu1 = new Menu('초코케이크');
+
+      expect(() => order.addMenuItem(menu1, 21)).toThrowError('[ERROR]');
+    });
+
+    test('주문 수량이 한도를 초과하면 에러를 던져야 함', () => {
+      const mockMenu = new Menu('초코케이크');
+
+      order.addMenuItem(mockMenu, 5);
+
+      expect(() => order.addMenuItem(mockMenu, 16)).toThrowError('[ERROR]');
+    });
+  });
 });
