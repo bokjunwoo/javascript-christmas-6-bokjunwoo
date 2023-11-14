@@ -49,7 +49,7 @@ class App {
   processOrderSheet(orderSheetInput) {
     orderSheetInput.forEach((orderSheet) => {
       const [menuName, quantity] = orderSheet.split('-');
-      const menu = new Menu(menuName, quantity);
+      const menu = new Menu(menuName);
       this.#order.addMenuItem(menu, parseInt(quantity));
     });
   }
