@@ -1,4 +1,11 @@
-import { ERROR_MESSAGE } from './constants.js';
+import {
+  BADGES,
+  DATES,
+  DISCOUNT_CONSTANTS,
+  ERROR_MESSAGE,
+  GIFT_EVENT,
+  MAX_ORDER_QUANTITY,
+} from './constants.js';
 import { menuData } from './data.js';
 
 export const isValidVisitDate = (date) => {
@@ -12,7 +19,7 @@ export const isValidVisitDate = (date) => {
     throw new Error(ERROR_MESSAGE.NOT_INTEGER);
   }
 
-  if (numericDate < 1 || numericDate > 31) {
+  if (numericDate < DATES.MIN_DATE || numericDate > DATES.MAX_DATE) {
     throw new Error(ERROR_MESSAGE.INVALID_DATE);
   }
 
@@ -21,7 +28,7 @@ export const isValidVisitDate = (date) => {
 
 export const validateMenuName = (name) => {
   if (!menuData.find((menu) => menu.name === name)) {
-    throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
+    throw new Error(ERROR_MESSAGE.INVALID_ORDER);
   }
 };
 
@@ -29,19 +36,19 @@ export const validateMenuQuantity = (quantity) => {
   const numericQuantity = Number(quantity);
 
   if (isNaN(numericQuantity)) {
-    throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
+    throw new Error(ERROR_MESSAGE.INVALID_ORDER);
   }
 
   if (quantity === undefined) {
-    throw new Error('[ERROR] 주문하신 메뉴의 수량이 입력되지 않았습니다.');
+    throw new Error(ERROR_MESSAGE.MISSING_QUANTITY);
   }
 
   if (!Number.isInteger(numericQuantity)) {
-    throw new Error('[ERROR] 메뉴의 수량은 정수여야 합니다.');
+    throw new Error(ERROR_MESSAGE.NON_INTEGER_QUANTITY);
   }
 
-  if (numericQuantity > 20) {
-    throw new Error('[ERROR] 최대 주문 수량이 넘었습니다.');
+  if (numericQuantity > MAX_ORDER_QUANTITY) {
+    throw new Error(ERROR_MESSAGE.EXCEED_MAX_QUANTITY);
   }
 };
 
@@ -49,27 +56,30 @@ export const checkOrderQuantityLimit = (
   currentQuantity,
   additionalQuantity
 ) => {
-  if (currentQuantity + additionalQuantity > 20) {
-    throw new Error('[ERROR] 총 주문 수량이 20개를 초과했습니다.');
+  if (currentQuantity + additionalQuantity > MAX_ORDER_QUANTITY) {
+    throw new Error(ERROR_MESSAGE.EXCEED_TOTAL_QUANTITY_LIMIT);
   }
 };
 
 export const getBadge = (totalDiscountAmount) => {
-  if (totalDiscountAmount >= 20000) {
-    return '산타';
-  } else if (totalDiscountAmount >= 10000) {
-    return '트리';
-  } else if (totalDiscountAmount >= 5000) {
-    return '별';
+  if (totalDiscountAmount >= BADGES.THRESHOLD_SANTA) {
+    return BADGES.SANTA;
+  } else if (totalDiscountAmount >= BADGES.THRESHOLD_STAR) {
+    return BADGES.TREE;
+  } else if (totalDiscountAmount >= BADGES.THRESHOLD_STAR) {
+    return BADGES.STAR;
   } else {
-    return '없음';
+    return BADGES.NONE;
   }
 };
 
 export const getGiftEvent = (totalOrderAmountBeforeDiscount) => {
-  if (totalOrderAmountBeforeDiscount >= 120000) {
-    return '샴페인 1개';
+  if (
+    totalOrderAmountBeforeDiscount >=
+    DISCOUNT_CONSTANTS.GIFT_EVENT_DISCOUNT_THRESHOLD
+  ) {
+    return GIFT_EVENT.ONE_CHAMPAGNE;
   } else {
-    return '없음';
+    return GIFT_EVENT.NONE;
   }
 };

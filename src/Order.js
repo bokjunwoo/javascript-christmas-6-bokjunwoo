@@ -1,3 +1,4 @@
+import { MENU_NAMES, MENU_TYPES } from './constants.js';
 import { checkOrderQuantityLimit, validateMenuQuantity } from './utils.js';
 
 class Order {
@@ -32,7 +33,7 @@ class Order {
 
   mainMenuTotalQuantity() {
     const mainMenuItems = this.#orderItems.filter(
-      (item) => item.type === 'main'
+      (item) => item.type === MENU_TYPES.MAIN
     );
     const mainMenuTotalQuantity = mainMenuItems.reduce(
       (total, item) => total + item.quantity,
@@ -43,7 +44,7 @@ class Order {
 
   dessertTotalQuantity() {
     const dessertItems = this.#orderItems.filter(
-      (item) => item.type === 'dessert'
+      (item) => item.type === MENU_TYPES.DESSERT
     );
     const dessertTotalQuantity = dessertItems.reduce(
       (total, item) => total + item.quantity,
@@ -53,7 +54,7 @@ class Order {
   }
 
   isGiftEventMenuIncluded() {
-    return this.#orderItems.some((item) => item.name === '샴페인');
+    return this.#orderItems.some((item) => item.name === MENU_NAMES.CHAMPAGNE);
   }
 
   validateAndAdd(quantity) {

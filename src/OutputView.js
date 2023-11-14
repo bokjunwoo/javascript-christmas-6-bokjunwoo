@@ -1,9 +1,11 @@
 import { Console } from '@woowacourse/mission-utils';
-import { RESTAURANT_EVENT_PLANNER_MESSAGE } from './constants.js';
+import {
+  OUTPUT_MESSAGES,
+} from './constants.js';
 
 const OutputView = {
   printIntroduction() {
-    Console.print(RESTAURANT_EVENT_PLANNER_MESSAGE);
+    Console.print(OUTPUT_MESSAGES.INTRODUCTION);
   },
 
   printErrorMessage(message) {
@@ -11,26 +13,26 @@ const OutputView = {
   },
 
   printOrderMenu(menuOrdered) {
-    Console.print('\n<주문 메뉴>');
+    Console.print(OUTPUT_MESSAGES.ORDER_MENU);
     menuOrdered.forEach((menu) => {
       Console.print(menu);
     });
   },
 
   printTotalOrderAmountBeforeDiscount(totalOrderAmountBeforeDiscount) {
-    Console.print('\n<할인 전 총주문 금액>');
+    Console.print(OUTPUT_MESSAGES.TOTAL_ORDER_AMOUNT_BEFORE_DISCOUNT);
     Console.print(`${totalOrderAmountBeforeDiscount.toLocaleString()}원`);
   },
 
   printGiftEvent(giftMenu) {
-    Console.print('\n<증정 메뉴>');
+    Console.print(OUTPUT_MESSAGES.GIFT_EVENT);
     Console.print(giftMenu);
   },
 
   printBenefitDetails(benefitDetails) {
-    Console.print('\n<혜택 내역>');
+    Console.print(OUTPUT_MESSAGES.BENEFIT_DETAILS);
     if (!benefitDetails) {
-      Console.print('없음');
+      Console.print(OUTPUT_MESSAGES.NO_RESULT);
       return;
     }
 
@@ -40,21 +42,21 @@ const OutputView = {
   },
 
   printResultTotalDiscountAmount(totalDiscountAmount) {
-    Console.print('\n<총혜택 금액>');
+    Console.print(OUTPUT_MESSAGES.RESULT_TOTAL_DISCOUNT_AMOUNT);
     if (totalDiscountAmount === 0) {
-      Console.print('없음');
+      Console.print(OUTPUT_MESSAGES.NO_DISCOUNT);
     } else {
       Console.print(`-${totalDiscountAmount.toLocaleString()}원`);
     }
   },
 
   printPaymentAmountAfterDiscount(paymentAmountAfterDiscount) {
-    Console.print('\n<할인 후 예상 결제 금액>');
+    Console.print(OUTPUT_MESSAGES.PAYMENT_AMOUNT_AFTER_DISCOUNT);
     Console.print(`${paymentAmountAfterDiscount.toLocaleString()}원`);
   },
 
   printDecemberEventBadge(badge) {
-    Console.print('\n<12월 이벤트 배지>');
+    Console.print(OUTPUT_MESSAGES.DECEMBER_EVENT_BADGE);
     Console.print(badge);
   },
 };

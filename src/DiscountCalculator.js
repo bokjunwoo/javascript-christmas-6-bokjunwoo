@@ -1,3 +1,5 @@
+import { DISCOUNT_CONSTANTS } from './constants.js';
+
 class DiscountCalculator {
   #date;
   #order;
@@ -8,7 +10,9 @@ class DiscountCalculator {
   }
 
   shouldApplyDiscount() {
-    return this.#order.calculateTotalPrice() >= 10000;
+    return (
+      this.#order.calculateTotalPrice() >= DISCOUNT_CONSTANTS.DISCOUNT_THRESHOLD
+    );
   }
 
   calculateTotalDiscountAmount() {
@@ -37,11 +41,16 @@ class DiscountCalculator {
   }
 
   calculateSpecialDiscount() {
-    return this.#date.isSpecialDiscountDay() ? 1000 : 0;
+    return this.#date.isSpecialDiscountDay()
+      ? DISCOUNT_CONSTANTS.SPECIAL_DISCOUNT_AMOUNT
+      : 0;
   }
 
   calculateGiftEventDiscount() {
-    return this.#order.calculateTotalPrice() >= 120000 ? 25000 : 0;
+    return this.#order.calculateTotalPrice() >=
+      DISCOUNT_CONSTANTS.GIFT_EVENT_DISCOUNT_THRESHOLD
+      ? DISCOUNT_CONSTANTS.GIFT_EVENT_DISCOUNT_AMOUNT
+      : 0;
   }
 
   calculateAdjustedDiscountAmount() {
@@ -50,10 +59,11 @@ class DiscountCalculator {
     let totalDiscountAmount = this.calculateTotalDiscountAmount();
 
     if (
-      this.#order.calculateTotalPrice() >= 120000 &&
+      this.#order.calculateTotalPrice() >=
+        DISCOUNT_CONSTANTS.GIFT_EVENT_DISCOUNT_THRESHOLD &&
       !isGiftEventMenuIncluded
     ) {
-      totalDiscountAmount -= 25000;
+      totalDiscountAmount -= DISCOUNT_CONSTANTS.GIFT_EVENT_DISCOUNT_AMOUNT;
     }
 
     return totalDiscountAmount;
@@ -65,15 +75,23 @@ class DiscountCalculator {
     const isWeekend = this.#date.isWeekend();
     const benefits = [
       {
-        name: '크리스마스 디데이 할인',
+        name: DISCOUNT_CONSTANTS.CHRISTMAS_DISCOUNT_NAME,
         amount: this.calculateChristmasDiscount(),
       },
       {
-        name: isWeekend ? '주말 할인' : '평일 할인',
+        name: isWeekend
+          ? DISCOUNT_CONSTANTS.WEEKEND_DISCOUNT_NAME
+          : DISCOUNT_CONSTANTS.WEEKDAY_DISCOUNT_NAME,
         amount: this.calculateWeekendOrWeekdayDiscount(),
       },
-      { name: '특별 할인', amount: this.calculateSpecialDiscount() },
-      { name: '증정 이벤트', amount: this.calculateGiftEventDiscount() },
+      {
+        name: DISCOUNT_CONSTANTS.SPECIAL_DISCOUNT_NAME,
+        amount: this.calculateSpecialDiscount(),
+      },
+      {
+        name: DISCOUNT_CONSTANTS.GIFT_EVENT_DISCOUNT_NAME,
+        amount: this.calculateGiftEventDiscount(),
+      },
     ];
 
     return benefits.filter((benefit) => benefit.amount > 0);
