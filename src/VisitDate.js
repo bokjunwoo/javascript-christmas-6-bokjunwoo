@@ -1,5 +1,5 @@
 import { DATES, DISCOUNT_CONSTANTS } from './constants.js';
-import { isValidVisitDate } from './validate.js';
+import { validVisitDate } from './validate.js';
 
 class VisitDate {
   #date;
@@ -10,7 +10,7 @@ class VisitDate {
   }
 
   #validate(date) {
-    isValidVisitDate(date);
+    validVisitDate(date);
   }
 
   christmasDiscountAmount() {

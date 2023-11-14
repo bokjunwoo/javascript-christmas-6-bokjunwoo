@@ -1,7 +1,7 @@
 import { DATES, ERROR_MESSAGE, MAX_ORDER_QUANTITY } from './constants.js';
 import { menuData } from './data.js';
 
-export const isValidVisitDate = (date) => {
+export const validVisitDate = (date) => {
   const numericDate = Number(date);
 
   if (isNaN(numericDate)) {
@@ -15,8 +15,6 @@ export const isValidVisitDate = (date) => {
   if (numericDate < DATES.MIN_DATE || numericDate > DATES.MAX_DATE) {
     throw new Error(ERROR_MESSAGE.INVALID_DATE);
   }
-
-  return true;
 };
 
 export const validateMenuName = (name) => {
