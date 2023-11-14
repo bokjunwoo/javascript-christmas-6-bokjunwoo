@@ -67,6 +67,9 @@ export const OUTPUT_MESSAGES = {
   NO_DISCOUNT: NONE,
   PAYMENT_AMOUNT_AFTER_DISCOUNT: '\n<할인 후 예상 결제 금액>',
   DECEMBER_EVENT_BADGE: '\n<12월 이벤트 배지>',
+  MENU_LIST_HEADER: '🍽️ 메뉴 리스트',
+  EVENT_PREVIEW_HEADER: '에 우테코 식당에서 받을 이벤트 혜택 미리 보기!',
+  THANK_YOU_MESSAGE: '\n이벤트 참여에 감사합니다.😁',
 };
 
 export const DISCOUNT_CONSTANTS = {
@@ -116,4 +119,11 @@ export const DATES = {
 
 export const MENU_NAMES = {
   CHAMPAGNE: '샴페인',
+};
+
+export const typeMap = {
+  appetizer: '애피타이저',
+  main: '메인',
+  dessert: '디저트',
+  drink: '음료',
 };
