@@ -13,6 +13,10 @@ class VisitDate {
     validVisitDate(date);
   }
 
+  #getDate() {
+    return new Date(`2023-12-${this.#date}`);
+  }
+
   christmasDiscountAmount() {
     if (
       this.#date >= DATES.CHRISTMAS_DISCOUNT_START_DATE &&
@@ -27,12 +31,12 @@ class VisitDate {
   }
 
   isWeekend() {
-    const dayOfWeek = new Date(`2023-12-${this.#date}`).getDay();
+    const dayOfWeek = this.#getDate().getDay();
     return dayOfWeek === 5 || dayOfWeek === 6;
   }
 
   isSpecialDiscountDay() {
-    const dayOfWeek = new Date(`2023-12-${this.#date}`).getDay();
+    const dayOfWeek = this.#getDate().getDay();
     const isSunday = dayOfWeek === 0;
     const isChristmas = this.#date === DATES.CHRISTMAS_DAY;
 
@@ -40,11 +44,11 @@ class VisitDate {
   }
 
   todayInfo() {
-    const date = new Date(`2023-12-${this.#date}`);
+    const date = this.#getDate();
     const month = date.getMonth() + 1;
     const day = date.getDate();
 
-    const dayOfWeek = new Date(`2023-12-${this.#date}`).getDay();
+    const dayOfWeek = this.#getDate().getDay();
     const days = ['일', '월', '화', '수', '목', '금', '토'];
 
     return { month, day, dayOfTheWeek: days[dayOfWeek] };
