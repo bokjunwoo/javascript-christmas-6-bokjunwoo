@@ -105,4 +105,30 @@ describe('Order 클래스', () => {
       expect(result).toBe(3);
     });
   });
+
+  describe('isGiftEventMenuIncluded 메소드', () => {
+    test('기프트 이벤트 메뉴가 주문에 포함되어 있으면 true를 반환해야 함', () => {
+      const mockMenu1 = new MockMenu('초콜릿 케이크', 6000, 'dessert');
+      const mockMenu2 = new MockMenu('레드와인', 15000, 'drink');
+      const mockMenu3 = new MockMenu('샴페인', 30000, 'drink');
+
+      order.addMenuItem(mockMenu1, 2);
+      order.addMenuItem(mockMenu2, 1);
+      order.addMenuItem(mockMenu3, 1);
+
+      const result = order.isGiftEventMenuIncluded();
+      expect(result).toBe(true);
+    });
+
+    test('기프트 이벤트 메뉴가 주문에 포함되어 있지 않으면 false를 반환해야 함', () => {
+      const mockMenu1 = new MockMenu('아메리카노', 3000, 'main');
+      const mockMenu2 = new MockMenu('초콜릿 케이크', 6000, 'dessert');
+
+      order.addMenuItem(mockMenu1, 2);
+      order.addMenuItem(mockMenu2, 1);
+
+      const result = order.isGiftEventMenuIncluded();
+      expect(result).toBe(false);
+    });
+  });
 });
