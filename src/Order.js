@@ -11,16 +11,16 @@ class Order {
   #orderQuantity;
 
   constructor() {
+    this.#resetOrder();
+  }
+
+  #resetOrder() {
     this.#orderItems = [];
     this.#orderQuantity = 0;
   }
 
-  menuOrdered() {
-    return this.#orderItems.map((item) => `${item.name}-${item.quantity}`);
-  }
-
   addMenuItem(menu, quantity) {
-    this.validateAndAdd(quantity);
+    this.#validateAndAdd(quantity);
 
     const { name, price, type } = menu.menuInfo();
 
@@ -29,35 +29,35 @@ class Order {
   }
 
   calculateTotalAmount() {
-    const total = this.#orderItems.reduce(
+    return this.#orderItems.reduce(
       (total, item) => total + item.quantity * item.price,
       0
     );
-    return total;
+  }
+
+  #totalQuantityByType(menuType) {
+    const items = this.#orderItems.filter((item) => item.type === menuType);
+    return items.reduce((total, item) => total + item.quantity, 0);
   }
 
   mainMenuTotalQuantity() {
-    return this.totalQuantityByType(MENU_TYPES.MAIN);
+    return this.#totalQuantityByType(MENU_TYPES.MAIN);
   }
 
   dessertTotalQuantity() {
-    return this.totalQuantityByType(MENU_TYPES.DESSERT);
-  }
-
-  totalQuantityByType(menuType) {
-    const items = this.#orderItems.filter((item) => item.type === menuType);
-    return items.reduce((total, item) => total + item.quantity, 0);
+    return this.#totalQuantityByType(MENU_TYPES.DESSERT);
   }
 
   isGiftEventMenuIncluded() {
     return this.#orderItems.some((item) => item.name === MENU_NAMES.CHAMPAGNE);
   }
 
-  validateAndAdd(quantity) {
+  #validateAndAdd(quantity) {
     try {
       validateMenuQuantity(quantity);
       checkOrderQuantityLimit(this.#orderQuantity, quantity);
     } catch (error) {
+      this.#resetOrder();
       throw new Error(error.message);
     }
   }
@@ -67,9 +67,13 @@ class Order {
       checkDuplicateMenu(this.#orderItems);
       checkOrderType(this.#orderItems);
     } catch (error) {
-      this.#orderItems = [];
+      this.#resetOrder();
       throw error;
     }
+  }
+
+  menuOrdered() {
+    return this.#orderItems.map((item) => `${item.name}-${item.quantity}`);
   }
 }
 
