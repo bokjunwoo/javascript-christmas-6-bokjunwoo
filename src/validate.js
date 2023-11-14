@@ -58,3 +58,13 @@ export const checkDuplicateMenu = (orderItems) => {
     seen.add(item.name);
   });
 };
+
+export const checkOrderType = (orderItems) => {
+  const isOnlyBeverage = orderItems.every(
+    (item) => item.type === MENU_TYPES.DRINK
+  );
+
+  if (isOnlyBeverage) {
+    throw new Error(ERROR_MESSAGE.BEVERAGE_ONLY);
+  }
+};
