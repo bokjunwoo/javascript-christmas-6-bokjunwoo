@@ -11,7 +11,7 @@ class DiscountCalculator {
 
   shouldApplyDiscount() {
     return (
-      this.#order.calculateTotalPrice() >= DISCOUNT_CONSTANTS.DISCOUNT_THRESHOLD
+      this.#order.calculateTotalAmount() >= DISCOUNT_CONSTANTS.DISCOUNT_THRESHOLD
     );
   }
 
@@ -47,7 +47,7 @@ class DiscountCalculator {
   }
 
   calculateGiftEventDiscount() {
-    return this.#order.calculateTotalPrice() >=
+    return this.#order.calculateTotalAmount() >=
       DISCOUNT_CONSTANTS.GIFT_EVENT_DISCOUNT_THRESHOLD
       ? DISCOUNT_CONSTANTS.GIFT_EVENT_DISCOUNT_AMOUNT
       : 0;
@@ -59,7 +59,7 @@ class DiscountCalculator {
     let totalDiscountAmount = this.calculateTotalDiscountAmount();
 
     if (
-      this.#order.calculateTotalPrice() >=
+      this.#order.calculateTotalAmount() >=
         DISCOUNT_CONSTANTS.GIFT_EVENT_DISCOUNT_THRESHOLD &&
       !isGiftEventMenuIncluded
     ) {

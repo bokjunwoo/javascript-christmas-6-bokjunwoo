@@ -60,7 +60,7 @@ class App {
       this.#order
     );
 
-    const totalOrderAmountBeforeDiscount = this.#order.calculateTotalPrice();
+    const totalOrderAmountBeforeDiscount = this.#order.calculateTotalAmount();
     const { totalDiscountAmount, finalDiscountAmount } =
       this.calculateDiscountAmounts(discountCalculator);
 

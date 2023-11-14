@@ -6,7 +6,7 @@ describe('DiscountCalculator', () => {
 
     test('총 가격이 10000 이상이면 할인 적용되어야 함', () => {
       const order = {
-        calculateTotalPrice: jest.fn().mockReturnValue(10000),
+        calculateTotalAmount: jest.fn().mockReturnValue(10000),
         mainMenuTotalQuantity: jest.fn().mockReturnValue(2),
         dessertTotalQuantity: jest.fn().mockReturnValue(1),
       };
@@ -19,7 +19,7 @@ describe('DiscountCalculator', () => {
 
     test('총 가격이 10000 미만이면 할인 적용되지 않아야 함', () => {
       const order = {
-        calculateTotalPrice: jest.fn().mockReturnValue(8000),
+        calculateTotalAmount: jest.fn().mockReturnValue(8000),
         mainMenuTotalQuantity: jest.fn().mockReturnValue(2),
         dessertTotalQuantity: jest.fn().mockReturnValue(1),
       };
@@ -62,7 +62,7 @@ describe('DiscountCalculator', () => {
 
   describe('calculateSpecialDiscount 메소드', () => {
     const order = {
-      calculateTotalPrice: jest.fn().mockReturnValue(12000),
+      calculateTotalAmount: jest.fn().mockReturnValue(12000),
     };
 
     test('특별 할인 날이면 1000의 할인이 반환되어야 함', () => {
@@ -92,7 +92,7 @@ describe('DiscountCalculator', () => {
     const date = {};
     test('주문 총 가격이 120000 이상이면 증정 이벤트 가격이 할인이 반환되어야 함', () => {
       const order = {
-        calculateTotalPrice: jest.fn().mockReturnValue(130000),
+        calculateTotalAmount: jest.fn().mockReturnValue(130000),
       };
 
       const discountCalculator = new DiscountCalculator(date, order);
@@ -103,7 +103,7 @@ describe('DiscountCalculator', () => {
 
     test('주문 총 가격이 120000 미만이면 증정 이벤트 가격 할인이 적용되지 않아야 함', () => {
       const order = {
-        calculateTotalPrice: jest.fn().mockReturnValue(100000),
+        calculateTotalAmount: jest.fn().mockReturnValue(100000),
       };
 
       const discountCalculator = new DiscountCalculator(date, order);
@@ -121,7 +121,7 @@ describe('DiscountCalculator', () => {
         christmasDiscountAmount: jest.fn().mockReturnValue(1500),
       };
       const order = {
-        calculateTotalPrice: jest.fn().mockReturnValue(10000),
+        calculateTotalAmount: jest.fn().mockReturnValue(10000),
         mainMenuTotalQuantity: jest.fn().mockReturnValue(2),
         dessertTotalQuantity: jest.fn().mockReturnValue(3),
       };
@@ -139,7 +139,7 @@ describe('DiscountCalculator', () => {
         christmasDiscountAmount: jest.fn().mockReturnValue(0),
       };
       const order = {
-        calculateTotalPrice: jest.fn().mockReturnValue(12000),
+        calculateTotalAmount: jest.fn().mockReturnValue(12000),
         mainMenuTotalQuantity: jest.fn().mockReturnValue(0),
         dessertTotalQuantity: jest.fn().mockReturnValue(10),
       };
@@ -157,7 +157,7 @@ describe('DiscountCalculator', () => {
         christmasDiscountAmount: jest.fn().mockReturnValue(3200),
       };
       const order = {
-        calculateTotalPrice: jest.fn().mockReturnValue(130000),
+        calculateTotalAmount: jest.fn().mockReturnValue(130000),
         mainMenuTotalQuantity: jest.fn().mockReturnValue(5),
         dessertTotalQuantity: jest.fn().mockReturnValue(10),
       };
@@ -178,7 +178,7 @@ describe('DiscountCalculator', () => {
       };
 
       const order = {
-        calculateTotalPrice: jest.fn().mockReturnValue(120000),
+        calculateTotalAmount: jest.fn().mockReturnValue(120000),
         mainMenuTotalQuantity: jest.fn().mockReturnValue(0),
         dessertTotalQuantity: jest.fn().mockReturnValue(0),
         isGiftEventMenuIncluded: jest.fn().mockReturnValue(true),
@@ -198,7 +198,7 @@ describe('DiscountCalculator', () => {
       };
 
       const order = {
-        calculateTotalPrice: jest.fn().mockReturnValue(120000),
+        calculateTotalAmount: jest.fn().mockReturnValue(120000),
         mainMenuTotalQuantity: jest.fn().mockReturnValue(0),
         dessertTotalQuantity: jest.fn().mockReturnValue(0),
         isGiftEventMenuIncluded: jest.fn().mockReturnValue(false),
@@ -220,7 +220,7 @@ describe('DiscountCalculator', () => {
       };
 
       const order = {
-        calculateTotalPrice: jest.fn().mockReturnValue(8000),
+        calculateTotalAmount: jest.fn().mockReturnValue(8000),
         mainMenuTotalQuantity: jest.fn().mockReturnValue(1),
         dessertTotalQuantity: jest.fn().mockReturnValue(1),
       };
@@ -239,7 +239,7 @@ describe('DiscountCalculator', () => {
       };
 
       const order = {
-        calculateTotalPrice: jest.fn().mockReturnValue(120000),
+        calculateTotalAmount: jest.fn().mockReturnValue(120000),
         mainMenuTotalQuantity: jest.fn().mockReturnValue(5),
         dessertTotalQuantity: jest.fn().mockReturnValue(5),
       };
@@ -263,7 +263,7 @@ describe('DiscountCalculator', () => {
       };
 
       const order = {
-        calculateTotalPrice: jest.fn().mockReturnValue(12000),
+        calculateTotalAmount: jest.fn().mockReturnValue(12000),
         mainMenuTotalQuantity: jest.fn().mockReturnValue(0),
         dessertTotalQuantity: jest.fn().mockReturnValue(3),
       };

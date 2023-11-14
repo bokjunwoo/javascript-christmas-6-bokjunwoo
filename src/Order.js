@@ -30,7 +30,7 @@ class Order {
     this.handleDuplicateAndTypeError(this.#orderItems);
   }
 
-  calculateTotalPrice() {
+  calculateTotalAmount() {
     const total = this.#orderItems.reduce(
       (total, item) => total + item.quantity * item.price,
       0
