@@ -39,25 +39,16 @@ class Order {
   }
 
   mainMenuTotalQuantity() {
-    const mainMenuItems = this.#orderItems.filter(
-      (item) => item.type === MENU_TYPES.MAIN
-    );
-    const mainMenuTotalQuantity = mainMenuItems.reduce(
-      (total, item) => total + item.quantity,
-      0
-    );
-    return mainMenuTotalQuantity;
+    return this.totalQuantityByType(MENU_TYPES.MAIN);
   }
 
   dessertTotalQuantity() {
-    const dessertItems = this.#orderItems.filter(
-      (item) => item.type === MENU_TYPES.DESSERT
-    );
-    const dessertTotalQuantity = dessertItems.reduce(
-      (total, item) => total + item.quantity,
-      0
-    );
-    return dessertTotalQuantity;
+    return this.totalQuantityByType(MENU_TYPES.DESSERT);
+  }
+
+  totalQuantityByType(menuType) {
+    const items = this.#orderItems.filter((item) => item.type === menuType);
+    return items.reduce((total, item) => total + item.quantity, 0);
   }
 
   isGiftEventMenuIncluded() {
