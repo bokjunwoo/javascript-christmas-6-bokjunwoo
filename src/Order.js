@@ -26,8 +26,6 @@ class Order {
 
     this.#orderItems.push({ name, quantity, price, type });
     this.#orderQuantity += quantity;
-
-    this.handleDuplicateAndTypeError(this.#orderItems);
   }
 
   calculateTotalAmount() {
@@ -64,12 +62,13 @@ class Order {
     }
   }
 
-  handleDuplicateAndTypeError(orderItems) {
+  handleDuplicateAndTypeError() {
     try {
-      checkDuplicateMenu(orderItems);
-      checkOrderType(orderItems);
+      checkDuplicateMenu(this.#orderItems);
+      checkOrderType(this.#orderItems);
     } catch (error) {
-      throw new Error(error.message);
+      this.#orderItems = [];
+      throw error;
     }
   }
 }
