@@ -1,56 +1,10 @@
 import {
   BADGES,
-  DATES,
   DISCOUNT_CONSTANTS,
   ERROR_MESSAGE,
   GIFT_EVENT,
   MAX_ORDER_QUANTITY,
 } from './constants.js';
-import { menuData } from './data.js';
-
-export const isValidVisitDate = (date) => {
-  const numericDate = Number(date);
-
-  if (isNaN(numericDate)) {
-    throw new Error(ERROR_MESSAGE.NOT_NUMERIC);
-  }
-
-  if (!Number.isInteger(numericDate)) {
-    throw new Error(ERROR_MESSAGE.NOT_INTEGER);
-  }
-
-  if (numericDate < DATES.MIN_DATE || numericDate > DATES.MAX_DATE) {
-    throw new Error(ERROR_MESSAGE.INVALID_DATE);
-  }
-
-  return true;
-};
-
-export const validateMenuName = (name) => {
-  if (!menuData.find((menu) => menu.name === name)) {
-    throw new Error(ERROR_MESSAGE.INVALID_ORDER);
-  }
-};
-
-export const validateMenuQuantity = (quantity) => {
-  const numericQuantity = Number(quantity);
-
-  if (isNaN(numericQuantity)) {
-    throw new Error(ERROR_MESSAGE.INVALID_ORDER);
-  }
-
-  if (quantity === undefined) {
-    throw new Error(ERROR_MESSAGE.MISSING_QUANTITY);
-  }
-
-  if (!Number.isInteger(numericQuantity)) {
-    throw new Error(ERROR_MESSAGE.NON_INTEGER_QUANTITY);
-  }
-
-  if (numericQuantity > MAX_ORDER_QUANTITY) {
-    throw new Error(ERROR_MESSAGE.EXCEED_MAX_QUANTITY);
-  }
-};
 
 export const checkOrderQuantityLimit = (
   currentQuantity,
