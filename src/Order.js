@@ -1,6 +1,10 @@
 import { MENU_NAMES, MENU_TYPES } from './constants.js';
 import { checkOrderQuantityLimit } from './utils.js';
-import { validateMenuQuantity } from './validate.js';
+import {
+  checkDuplicateMenu,
+  checkOrderType,
+  validateMenuQuantity,
+} from './validate.js';
 
 class Order {
   #orderItems;
@@ -22,6 +26,8 @@ class Order {
 
     this.#orderItems.push({ name, quantity, price, type });
     this.#orderQuantity += quantity;
+
+    this.handleDuplicateAndTypeError(this.#orderItems);
   }
 
   calculateTotalPrice() {
@@ -62,6 +68,15 @@ class Order {
     try {
       validateMenuQuantity(quantity);
       checkOrderQuantityLimit(this.#orderQuantity, quantity);
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  handleDuplicateAndTypeError(orderItems) {
+    try {
+      checkDuplicateMenu(orderItems);
+      checkOrderType(orderItems);
     } catch (error) {
       throw new Error(error.message);
     }
