@@ -37,3 +37,17 @@ export const getGiftEvent = (totalOrderAmountBeforeDiscount) => {
     return GIFT_EVENT.NONE;
   }
 };
+
+export const organizeMenuByType = (menuData) => {
+  return menuData.reduce((organizedMenu, item) => {
+    if (!organizedMenu[item.type]) {
+      organizedMenu[item.type] = [];
+    }
+    organizedMenu[item.type].push(item);
+    return organizedMenu;
+  }, {});
+};
+
+export const formatPrice = (price) => {
+  return price.toLocaleString();
+};
