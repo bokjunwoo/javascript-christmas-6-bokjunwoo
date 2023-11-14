@@ -33,4 +33,22 @@ describe('Order 클래스', () => {
       expect(order.calculateTotalAmount()).not.toBe(100000);
     });
   });
+
+  describe('menuOrdered 메소드', () => {
+    test('주문이 없을 때 빈 배열을 반환해야 함', () => {
+      const result = order.menuOrdered();
+      expect(result).toEqual([]);
+    });
+
+    test('주문이 있을 때 각 메뉴와 수량을 문자열로 반환해야 함', () => {
+      const menu1 = new Menu('초코케이크');
+      const menu2 = new Menu('레드와인');
+
+      order.addMenuItem(menu1, 2);
+      order.addMenuItem(menu2, 1);
+
+      const result = order.menuOrdered();
+      expect(result).toEqual(['초코케이크-2', '레드와인-1']);
+    });
+  });
 });
