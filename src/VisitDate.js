@@ -38,6 +38,17 @@ class VisitDate {
 
     return isSunday || isChristmas;
   }
+
+  todayInfo() {
+    const date = new Date(`2023-12-${this.#date}`);
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    const dayOfWeek = new Date(`2023-12-${this.#date}`).getDay();
+    const days = ['일', '월', '화', '수', '목', '금', '토'];
+
+    return { month, day, dayOfTheWeek: days[dayOfWeek] };
+  }
 }
 
 export default VisitDate;
