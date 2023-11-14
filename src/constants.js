@@ -14,6 +14,9 @@ export const ERROR_MESSAGE = {
     '[ERROR] 최대 주문 수량이 넘었습니다. 다시 입력해주세요.',
   EXCEED_TOTAL_QUANTITY_LIMIT:
     '[ERROR] 총 주문 수량이 20개를 초과했습니다. 다시 입력해주세요.',
+  DUPLICATE_MENU: '[ERROR] 중복된 메뉴가 입력되었습니다. 다시 입력해 주세요.',
+  BEVERAGE_ONLY:
+    '[ERROR] 음료만 주문 시, 주문할 수 없습니다. 다시 입력해 주세요.',
 };
 
 const RESTAURANT_EVENT_PLANNER_MESSAGE = `안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.
@@ -84,6 +87,7 @@ export const DISCOUNT_CONSTANTS = {
 export const MENU_TYPES = {
   MAIN: 'main',
   DESSERT: 'dessert',
+  DRINK: 'drink',
   GIFT_EVENT: 'giftEvent',
 };
 
