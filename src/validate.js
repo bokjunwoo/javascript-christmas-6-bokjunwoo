@@ -49,22 +49,22 @@ export const validateMenuQuantity = (quantity) => {
 };
 
 export const checkDuplicateMenu = (orderItems) => {
-  const seen = new Set();
+  const nameSet = new Set();
 
   orderItems.forEach((item) => {
-    if (seen.has(item.name)) {
+    if (nameSet.has(item.name)) {
       throw new Error(ERROR_MESSAGE.DUPLICATE_MENU);
+    } else {
+      nameSet.add(item.name);
     }
-    seen.add(item.name);
   });
 };
 
 export const checkOrderType = (orderItems) => {
-  const isOnlyBeverage = orderItems.every(
-    (item) => item.type === MENU_TYPES.DRINK
-  );
+  const hasDrink = orderItems.some((item) => item.type === MENU_TYPES.DRINK);
+  const hasNonDrink = orderItems.some((item) => item.type !== MENU_TYPES.DRINK);
 
-  if (isOnlyBeverage) {
+  if (hasDrink && !hasNonDrink) {
     throw new Error(ERROR_MESSAGE.BEVERAGE_ONLY);
   }
 };
