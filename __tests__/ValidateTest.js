@@ -71,4 +71,25 @@ describe('Order 클래스 테스트', () => {
       expect(() => checkDuplicateMenu(orderItems)).toThrow('[ERROR]');
     });
   });
+
+  describe('checkOrderType() 유효성 검사', () => {
+    test('음료 외 다른 메뉴도 주문 한 경우', () => {
+      const orderItems = [
+        { name: '초코케이크', type: 'main' },
+        { name: '레드와인', type: 'drink' },
+        { name: '타파스', type: 'appetizer' },
+      ];
+
+      expect(() => checkOrderType(orderItems)).not.toThrow();
+    });
+
+    test('음료만 주문한 경우 에러 반환', () => {
+      const orderItems = [
+        { name: '제로콜라', type: 'drink' },
+        { name: '레드와인', type: 'drink' },
+      ];
+
+      expect(() => checkOrderType(orderItems)).toThrow('[ERROR]');
+    });
+  });
 });
