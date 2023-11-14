@@ -16,6 +16,7 @@ class App {
 
   async run() {
     OutputView.printIntroduction();
+    OutputView.printMenuList();
 
     await this.UserInputDate();
     await this.UserInputOrderSheet();
@@ -104,6 +105,7 @@ class App {
     totalDiscountAmount,
     paymentAmountAfterDiscount
   ) {
+    OutputView.printEventPreview(this.#visitDate.todayInfo());
     OutputView.printOrderMenu(this.#order.menuOrdered());
     OutputView.printTotalOrderAmountBeforeDiscount(
       totalOrderAmountBeforeDiscount
@@ -113,6 +115,7 @@ class App {
     OutputView.printResultTotalDiscountAmount(totalDiscountAmount);
     OutputView.printPaymentAmountAfterDiscount(paymentAmountAfterDiscount);
     OutputView.printDecemberEventBadge(getBadge(totalDiscountAmount));
+    OutputView.printThankYouMessage();
   }
 }
 
