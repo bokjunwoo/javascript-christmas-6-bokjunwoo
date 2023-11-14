@@ -18,11 +18,11 @@ class App {
     OutputView.printIntroduction();
     OutputView.printMenuList();
 
-    await this.UserInputDate();
-    await this.UserInputOrderSheet();
+    await this.#userInputDate();
+    await this.#userInputOrderSheet();
   }
 
-  async UserInputDate() {
+  async #userInputDate() {
     while (true) {
       try {
         const input = await InputView.inputDate();
@@ -34,12 +34,12 @@ class App {
     }
   }
 
-  async UserInputOrderSheet() {
+  async #userInputOrderSheet() {
     while (true) {
       try {
         const input = await InputView.inputOrderSheet();
-        this.processOrderSheet(input);
-        this.displayOrderDetails();
+        this.#processOrderSheet(input);
+        this.#displayOrderDetails();
         break;
       } catch (error) {
         OutputView.printErrorMessage(error.message);
@@ -47,7 +47,7 @@ class App {
     }
   }
 
-  processOrderSheet(orderSheetInput) {
+  #processOrderSheet(orderSheetInput) {
     orderSheetInput.forEach((orderSheet) => {
       const [menuName, quantity] = orderSheet.split('-');
       const menu = new Menu(menuName);
@@ -55,7 +55,7 @@ class App {
     });
   }
 
-  displayOrderDetails() {
+  #displayOrderDetails() {
     const discountCalculator = new DiscountCalculator(
       this.#visitDate,
       this.#order
@@ -63,9 +63,9 @@ class App {
 
     const totalOrderAmountBeforeDiscount = this.#order.calculateTotalAmount();
     const { totalDiscountAmount, finalDiscountAmount } =
-      this.calculateDiscountAmounts(discountCalculator);
+      this.#calculateDiscountAmounts(discountCalculator);
 
-    this.printOrderDetails(
+    this.#printOrderDetails(
       discountCalculator,
       totalOrderAmountBeforeDiscount,
       totalDiscountAmount,
@@ -73,7 +73,7 @@ class App {
     );
   }
 
-  calculateDiscountAmounts(discountCalculator) {
+  #calculateDiscountAmounts(discountCalculator) {
     const totalDiscountAmount =
       discountCalculator.calculateTotalDiscountAmount();
     const finalDiscountAmount =
@@ -81,7 +81,7 @@ class App {
     return { totalDiscountAmount, finalDiscountAmount };
   }
 
-  printOrderDetails(
+  #printOrderDetails(
     discountCalculator,
     totalOrderAmountBeforeDiscount,
     totalDiscountAmount,
@@ -91,7 +91,7 @@ class App {
     const paymentAmountAfterDiscount =
       totalOrderAmountBeforeDiscount - finalDiscountAmount;
 
-    this.outputOrderDetails(
+    this.#outputOrderDetails(
       totalOrderAmountBeforeDiscount,
       benefitDetails,
       totalDiscountAmount,
@@ -99,7 +99,7 @@ class App {
     );
   }
 
-  outputOrderDetails(
+  #outputOrderDetails(
     totalOrderAmountBeforeDiscount,
     benefitDetails,
     totalDiscountAmount,
