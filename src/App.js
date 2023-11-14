@@ -109,8 +109,8 @@ class App {
       totalOrderAmountBeforeDiscount
     );
     OutputView.printGiftEvent(getGiftEvent(totalOrderAmountBeforeDiscount));
-    OutputView.printResultTotalDiscountAmount(totalDiscountAmount);
     OutputView.printBenefitDetails(benefitDetails);
+    OutputView.printResultTotalDiscountAmount(totalDiscountAmount);
     OutputView.printPaymentAmountAfterDiscount(paymentAmountAfterDiscount);
     OutputView.printDecemberEventBadge(getBadge(totalDiscountAmount));
   }
