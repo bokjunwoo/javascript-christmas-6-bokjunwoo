@@ -1,4 +1,8 @@
-import { validateMenuQuantity } from '../src/validate.js';
+import {
+  checkDuplicateMenu,
+  checkOrderType,
+  validateMenuQuantity,
+} from '../src/validate.js';
 import { checkOrderQuantityLimit } from '../src/utils.js';
 
 describe('Order 클래스 테스트', () => {
@@ -43,6 +47,28 @@ describe('Order 클래스 테스트', () => {
       expect(() =>
         checkOrderQuantityLimit(currentQuantity, additionalQuantity)
       ).toThrow('[ERROR]');
+    });
+  });
+
+  describe('checkDuplicateMenu() 유효성 검사', () => {
+    test('중복된 메뉴가 없는 경우', () => {
+      const orderItems = [
+        { name: '초코케이크' },
+        { name: '레드와인' },
+        { name: '타파스' },
+      ];
+
+      expect(() => checkDuplicateMenu(orderItems)).not.toThrow();
+    });
+
+    test('중복된 메뉴가 있으면 에러 반환', () => {
+      const orderItems = [
+        { name: '초코케이크' },
+        { name: '레드와인' },
+        { name: '초코케이크' },
+      ];
+
+      expect(() => checkDuplicateMenu(orderItems)).toThrow('[ERROR]');
     });
   });
 });
