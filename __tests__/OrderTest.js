@@ -131,4 +131,26 @@ describe('Order 클래스', () => {
       expect(result).toBe(false);
     });
   });
+
+  describe('handleDuplicateAndTypeError 메소드', () => {
+    test('중복된 메뉴가 있는 경우 예외를 던져야 함', () => {
+      const mockMenu1 = new MockMenu('아메리카노', 3000, 'main');
+      const mockMenu2 = new MockMenu('아메리카노', 3000, 'main');
+
+      order.addMenuItem(mockMenu1, 2);
+      order.addMenuItem(mockMenu2, 2);
+
+      expect(() => order.handleDuplicateAndTypeError()).toThrow('[ERROR]');
+    });
+
+    test('음료만 주문하는 경우 예외를 던져야 함', () => {
+      const mockMenu1 = new MockMenu('아메리카노', 3000, 'drink');
+      const mockMenu2 = new MockMenu('카페라떼', 5000, 'drink');
+
+      order.addMenuItem(mockMenu1, 2);
+      order.addMenuItem(mockMenu2, 2);
+
+      expect(() => order.handleDuplicateAndTypeError()).toThrow('[ERROR]');
+    });
+  });
 });
