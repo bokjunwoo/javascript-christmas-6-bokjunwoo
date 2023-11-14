@@ -41,7 +41,7 @@ const OutputView = {
 
   printTotalOrderAmountBeforeDiscount(totalOrderAmountBeforeDiscount) {
     Console.print(OUTPUT_MESSAGES.TOTAL_ORDER_AMOUNT_BEFORE_DISCOUNT);
-    Console.print(`${totalOrderAmountBeforeDiscount.toLocaleString()}원`);
+    Console.print(`${formatPrice(totalOrderAmountBeforeDiscount)}원`);
   },
 
   printGiftEvent(giftMenu) {
@@ -57,7 +57,7 @@ const OutputView = {
     }
 
     benefitDetails.forEach((detail) => {
-      Console.print(`${detail.name}: -${detail.amount.toLocaleString()}원`);
+      Console.print(`${detail.name}: -${formatPrice(detail.amount)}원`);
     });
   },
 
@@ -66,13 +66,13 @@ const OutputView = {
     if (totalDiscountAmount === 0) {
       Console.print(OUTPUT_MESSAGES.NO_DISCOUNT);
     } else {
-      Console.print(`-${totalDiscountAmount.toLocaleString()}원`);
+      Console.print(`-${formatPrice(totalDiscountAmount)}원`);
     }
   },
 
   printPaymentAmountAfterDiscount(paymentAmountAfterDiscount) {
     Console.print(OUTPUT_MESSAGES.PAYMENT_AMOUNT_AFTER_DISCOUNT);
-    Console.print(`${paymentAmountAfterDiscount.toLocaleString()}원`);
+    Console.print(`${formatPrice(paymentAmountAfterDiscount)}원`);
   },
 
   printDecemberEventBadge(badge) {
